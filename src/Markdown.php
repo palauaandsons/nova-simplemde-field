@@ -1,6 +1,6 @@
 <?php
 
-namespace Lgf\Markdown;
+namespace PalauaAndSons\SimpleMDEField;
 
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
