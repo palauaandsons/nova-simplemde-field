@@ -1,6 +1,6 @@
 {
     "name": "palauaandsons/nova-simplemde-field",
-    "description": "A Laravel Nova field.",
+    "description": "A SimpleMDE field for Laravel Nova.",
     "keywords": [
         "laravel",
         "nova"
@@ -11,13 +11,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Lgf\\Markdown\\": "src/"
+            "PalauaAndSons\\SimpleMDEField\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Lgf\\Markdown\\FieldServiceProvider"
+                "PalauaAndSons\\SimpleMDEField\\FieldServiceProvider"
             ]
         }
     },
