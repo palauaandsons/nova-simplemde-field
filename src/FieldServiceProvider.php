@@ -1,6 +1,6 @@
 <?php
 
-namespace Lgf\Markdown;
+namespace PalauaAndSons\SimpleMDEField;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;
