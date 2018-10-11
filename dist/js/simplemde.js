@@ -29963,7 +29963,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "default-field",
-    { attrs: { field: _vm.field } },
+    { staticClass: "w-4/5 px-8 py-6", attrs: { field: _vm.field } },
     [
       _c("template", { slot: "field" }, [
         _c("textarea", {
