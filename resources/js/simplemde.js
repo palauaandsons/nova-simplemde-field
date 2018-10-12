@@ -1,5 +1,5 @@
 Nova.booting((Vue, router) => {
-    Vue.component('index-markdown', require('./components/IndexField'));
-    Vue.component('detail-markdown', require('./components/DetailField'));
-    Vue.component('form-markdown', require('./components/FormField'));
+    Vue.component('index-simplemde', require('./components/IndexField'));
+    Vue.component('detail-simplemde', require('./components/DetailField'));
+    Vue.component('form-simplemde', require('./components/FormField'));
 })
