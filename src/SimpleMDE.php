@@ -5,14 +5,14 @@ namespace PalauaAndSons\SimpleMDEField;
 use Laravel\Nova\Fields\Field;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
-class Markdown extends Field
+class SimpleMDE extends Field
 {
     /**
      * The field's component.
      *
      * @var string
      */
-    public $component = 'markdown';
+    public $component = 'simplemde';
 
     /**
      * Hydrate the given attribute on the model based on the incoming request.
@@ -23,10 +23,7 @@ class Markdown extends Field
      * @param  string  $attribute
      * @return void
      */
-    protected function fillAttributeFromRequest(NovaRequest $request,
-        $requestAttribute,
-        $model,
-        $attribute)
+    protected function fillAttributeFromRequest(NovaRequest $request, $requestAttribute, $model, $attribute)
     {
         if ($request->exists($requestAttribute)) {
             $model->{$attribute} = $request[$requestAttribute];

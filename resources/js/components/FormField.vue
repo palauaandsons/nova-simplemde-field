@@ -1,6 +1,6 @@
 <template>
-    <default-field :field="field" class="w-4/5 px-8 py-6">
-        <template slot="field">
+    <default-field :field="field">
+        <template slot="field" class="w-4/5">
             <textarea
                 ref="theTextArea"
                 :id="field.name"
