@@ -29,4 +29,19 @@ class SimpleMDE extends Field
             $model->{$attribute} = $request[$requestAttribute];
         }
     }
+
+    /**
+     * Help text.
+     *
+     * @param $text
+     * @return $this
+     */
+    public function help($text)
+    {
+        $this->withMeta([
+            'help' => is_callable($text) ? call_user_func($text) : $text,
+        ]);
+
+        return $this;
+    }
 }
