@@ -17,6 +17,10 @@
                 v-model="value"
             />
 
+            <p class="help-text help-text mt-2">
+                {{ field.help }}
+            </p>
+
             <p v-if="hasError" class="my-2 text-danger">
                 {{ firstError }}
             </p>
