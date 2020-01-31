@@ -2,9 +2,9 @@
 
 namespace PalauaAndSons\SimpleMDEField;
 
-use Laravel\Nova\Nova;
-use Laravel\Nova\Events\ServingNova;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Nova\Events\ServingNova;
+use Laravel\Nova\Nova;
 
 class FieldServiceProvider extends ServiceProvider
 {
@@ -16,8 +16,8 @@ class FieldServiceProvider extends ServiceProvider
     public function boot()
     {
         Nova::serving(function (ServingNova $event) {
-            Nova::script('simplemde', __DIR__.'/../dist/js/simplemde.js');
-            Nova::style('simplemde', __DIR__.'/../dist/css/simplemde.css');
+            Nova::script('nova-simplemde-field', __DIR__.'/../dist/js/simplemde.js');
+            Nova::style('nova-simplemde-field', __DIR__.'/../dist/css/simplemde.css');
         });
     }
 

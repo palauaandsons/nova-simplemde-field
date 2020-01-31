@@ -17,15 +17,13 @@
 
 <script>
   import SimpleMDE from "simplemde";
-  import { FormField, HandlesValidationErrors } from "laravel-nova";
+  import {FormField, HandlesValidationErrors} from "laravel-nova";
 
-  require("simplemde/dist/simplemde.min.css");
+  require("simplemde/dist/simplemde.min.css")
 
   export default {
     mixins: [FormField, HandlesValidationErrors],
-
     props: ["resourceName", "resourceId", "field"],
-
     data() {
       return {
         simplemde: null
@@ -52,7 +50,7 @@
           "link",
           {
             name: "link-internal",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange("[](/internal)", {
@@ -65,7 +63,7 @@
           },
           {
             name: "link-nofollow",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange('[](http://){rel="nofollow"}', {
@@ -79,17 +77,17 @@
           "|",
           {
             name: "image-markdown",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
-              cm.replaceRange("@image(id)", { line: cursor.line, ch: cursor.ch });
+              cm.replaceRange("@image(id)", {line: cursor.line, ch: cursor.ch});
             },
             className: "fa fa-picture-o",
             title: "Image"
           },
           {
             name: "image-markdown-left",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange("@image(id, left)", {
@@ -102,7 +100,7 @@
           },
           {
             name: "image-markdown-right",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange("@image(id, right)", {
@@ -116,7 +114,7 @@
           "|",
           {
             name: "quote",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange('@quote("name", "text here...")', {
@@ -141,17 +139,17 @@
           //                    },
           {
             name: "vimeo",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
-              cm.replaceRange("@vimeo(id)", { line: cursor.line, ch: cursor.ch });
+              cm.replaceRange("@vimeo(id)", {line: cursor.line, ch: cursor.ch});
             },
             className: "fa fa-vimeo",
             title: "Vimeo"
           },
           {
             name: "youtube",
-            action: function(editor) {
+            action: function (editor) {
               let cm = editor.codemirror;
               let cursor = cm.getCursor();
               cm.replaceRange("@youtube(id)", {
@@ -167,7 +165,7 @@
           "|",
           {
             name: "guide",
-            action: function() {
+            action: function () {
               window.open(window.location.origin + "/loquero/markdown", "_blank");
             },
             className: "fa fa-question-circle",

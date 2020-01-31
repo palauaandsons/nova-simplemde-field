@@ -1,9 +1,5 @@
 <template>
-    <panel-item :field="field">
-        <template slot="value">
-            TBD
-        </template>
-    </panel-item>
+    <panel-item :field="field" />
 </template>
 
 <script>
