@@ -2,7 +2,7 @@
   <default-field :field="field" :errors="errors" :full-width-content="true">
     <template slot="field">
       <textarea
-        ref="theTextArea"
+        ref="theTextarea"
         :id="field.name"
         class="w-full form-control form-input form-input-bordered"
         :class="errorClasses"
