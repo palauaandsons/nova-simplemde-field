@@ -20,6 +20,7 @@
   import {FormField, HandlesValidationErrors} from "laravel-nova";
 
   require("simplemde/dist/simplemde.min.css")
+  require("../../../dist/css/simplemde.css")
 
   export default {
     mixins: [FormField, HandlesValidationErrors],
