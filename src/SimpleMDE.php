@@ -17,9 +17,8 @@ class SimpleMDE extends Field
      * Help text.
      *
      * @param $text
-     * @return $this
      */
-    public function help($text)
+    public function help($text): self
     {
         $this->withMeta([
             'help' => is_callable($text) ? call_user_func($text) : $text,
