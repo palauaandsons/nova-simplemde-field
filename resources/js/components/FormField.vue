@@ -40,7 +40,6 @@ export default {
   },
 
   mounted() {
-    ``
     this.simplemde = new SimpleMDE({
       element: this.$refs.theTextarea,
       spellChecker: false,
@@ -185,7 +184,7 @@ export default {
       ]
     });
     this.simplemde.codemirror.on("change", (cm, changeObj) => {
-      this.value = this.simplemde.value();
+      this.handleChange(cm.getValue());
     });
     if (this.field.value) {
       this.simplemde.value(this.field.value);
