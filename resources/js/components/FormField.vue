@@ -1,9 +1,14 @@
 <template>
-  <default-field :field="field" :errors="errors" :full-width-content="true">
-    <template slot="field">
+  <DefaultField
+    :field="field"
+    :errors="errors"
+    :show-help-text="showHelpText"
+    :full-width-content="fullWidthContent"
+  >
+    <template #field>
       <textarea
         ref="theTextarea"
-        :id="field.name"
+        :id="field.attribute"
         class="w-full form-control form-input form-input-bordered"
         :class="errorClasses"
         :placeholder="field.name"
@@ -12,194 +17,202 @@
 
       <p class="help-text help-text mt-2">{{ field.help }}</p>
     </template>
-  </default-field>
+  </DefaultField>
 </template>
 
 <script>
-  import SimpleMDE from "simplemde";
-  import {FormField, HandlesValidationErrors} from "laravel-nova";
+import SimpleMDE from "simplemde";
+import { FormField, HandlesValidationErrors } from "laravel-nova";
 
-  require("simplemde/dist/simplemde.min.css")
-  require("../../../dist/css/simplemde.css")
+import 'simplemde/dist/simplemde.min.css';
 
-  export default {
-    mixins: [FormField, HandlesValidationErrors],
-    props: ["resourceName", "resourceId", "field"],
-    data() {
-      return {
-        simplemde: null
-      };
-    },
-    mounted() {
-      this.simplemde = new SimpleMDE({
-        element: this.$refs.theTextarea,
-        spellChecker: false,
-        showIcons: ["heading-1", "heading-2", "heading-3"],
-        hideIcons: ["image", "preview", "side-by-side"],
-        toolbar: [
-          "bold",
-          "italic",
-          "heading",
-          "heading-1",
-          "heading-2",
-          "heading-3",
-          "|",
-          "quote",
-          "unordered-list",
-          "ordered-list",
-          "|",
-          "link",
-          {
-            name: "link-internal",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("[](/internal)", {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-external-link fa-rotate-180",
-            title: "Internal Link"
+
+
+export default {
+  mixins: [FormField, HandlesValidationErrors],
+
+  props: ["resourceName", "resourceId", "field"],
+
+  data() {
+    return {
+      simplemde: null
+    };
+  },
+
+  mounted() {
+    ``
+    this.simplemde = new SimpleMDE({
+      element: this.$refs.theTextarea,
+      spellChecker: false,
+      showIcons: ["heading-1", "heading-2", "heading-3"],
+      hideIcons: ["image", "preview", "side-by-side"],
+      toolbar: [
+        "bold",
+        "italic",
+        "heading",
+        "heading-1",
+        "heading-2",
+        "heading-3",
+        "|",
+        "quote",
+        "unordered-list",
+        "ordered-list",
+        "|",
+        "link",
+        {
+          name: "link-internal",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("[](/internal)", {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          {
-            name: "link-nofollow",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange('[](http://){rel="nofollow"}', {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-external-link",
-            title: "External Link"
+          className: "fa fa-external-link fa-rotate-180",
+          title: "Internal Link"
+        },
+        {
+          name: "link-nofollow",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange('[](http://){rel="nofollow"}', {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          "|",
-          {
-            name: "image-markdown",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("@image(id)", {line: cursor.line, ch: cursor.ch});
-            },
-            className: "fa fa-picture-o",
-            title: "Image"
+          className: "fa fa-external-link",
+          title: "External Link"
+        },
+        "|",
+        {
+          name: "image-markdown",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("@image(id)", { line: cursor.line, ch: cursor.ch });
           },
-          {
-            name: "image-markdown-left",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("@image(id, left)", {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-file-image-o",
-            title: "Image Left"
+          className: "fa fa-picture-o",
+          title: "Image"
+        },
+        {
+          name: "image-markdown-left",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("@image(id, left)", {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          {
-            name: "image-markdown-right",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("@image(id, right)", {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-file-image-o",
-            title: "Image Right"
+          className: "fa fa-file-image-o",
+          title: "Image Left"
+        },
+        {
+          name: "image-markdown-right",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("@image(id, right)", {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          "|",
-          {
-            name: "quote",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange('@quote("name", "text here...")', {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-quote-right",
-            title: "Quote"
+          className: "fa fa-file-image-o",
+          title: "Image Right"
+        },
+        "|",
+        {
+          name: "quote",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange('@quote("name", "text here...")', {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          "|",
-          //                    {
-          //                        name: 'instagram',
-          //                        action: function (editor) {
-          //                            let cm = editor.codemirror;
-          //                            let cursor = cm.getCursor();
-          //
-          //                            cm.replaceRange('@instaram(id)', {line: cursor.line, ch: cursor.ch});
-          //                        },
-          //                        className: 'fa fa-instagram',
-          //                        title: 'Instagram'
-          //                    },
-          {
-            name: "vimeo",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("@vimeo(id)", {line: cursor.line, ch: cursor.ch});
-            },
-            className: "fa fa-vimeo",
-            title: "Vimeo"
+          className: "fa fa-quote-right",
+          title: "Quote"
+        },
+        "|",
+        //                    {
+        //                        name: 'instagram',
+        //                        action: function (editor) {
+        //                            let cm = editor.codemirror;
+        //                            let cursor = cm.getCursor();
+        //
+        //                            cm.replaceRange('@instaram(id)', {line: cursor.line, ch: cursor.ch});
+        //                        },
+        //                        className: 'fa fa-instagram',
+        //                        title: 'Instagram'
+        //                    },
+        {
+          name: "vimeo",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("@vimeo(id)", { line: cursor.line, ch: cursor.ch });
           },
-          {
-            name: "youtube",
-            action: function (editor) {
-              let cm = editor.codemirror;
-              let cursor = cm.getCursor();
-              cm.replaceRange("@youtube(id)", {
-                line: cursor.line,
-                ch: cursor.ch
-              });
-            },
-            className: "fa fa-youtube-play",
-            title: "Youtube"
+          className: "fa fa-vimeo",
+          title: "Vimeo"
+        },
+        {
+          name: "youtube",
+          action: function (editor) {
+            let cm = editor.codemirror;
+            let cursor = cm.getCursor();
+            cm.replaceRange("@youtube(id)", {
+              line: cursor.line,
+              ch: cursor.ch
+            });
           },
-          "|",
-          "fullscreen",
-          "|",
-          {
-            name: "guide",
-            action: function () {
-              window.open(window.location.origin + "/loquero/markdown", "_blank");
-            },
-            className: "fa fa-question-circle",
-            title: "Markdown Guide"
-          }
-        ]
-      });
-      this.simplemde.codemirror.on("change", (cm, changeObj) => {
-        this.value = this.simplemde.value();
-      });
-      if (this.field.value) {
-        this.simplemde.value(this.field.value);
-      }
-    },
-    methods: {
-      /*
-       * Set the initial, internal value for the field.
-       */
-      setInitialValue() {
-        this.value = this.field.value || "";
-      },
-      /**
-       * Fill the given FormData object with the field's internal value.
-       */
-      fill(formData) {
-        formData.append(this.field.attribute, this.value || "");
-      },
-      /**
-       * Update the field's internal value.
-       */
-      handleChange(value) {
-        this.value = value;
-      }
+          className: "fa fa-youtube-play",
+          title: "Youtube"
+        },
+        "|",
+        "fullscreen",
+        "|",
+        {
+          name: "guide",
+          action: function () {
+            window.open(window.location.origin + "/loquero/markdown", "_blank");
+          },
+          className: "fa fa-question-circle",
+          title: "Markdown Guide"
+        }
+      ]
+    });
+    this.simplemde.codemirror.on("change", (cm, changeObj) => {
+      this.value = this.simplemde.value();
+    });
+    if (this.field.value) {
+      this.simplemde.value(this.field.value);
     }
-  };
+  },
+
+  methods: {
+    /*
+     * Set the initial, internal value for the field.
+     */
+    setInitialValue() {
+      this.value = this.field.value || "";
+    },
+
+    /**
+     * Fill the given FormData object with the field's internal value.
+     */
+    fill(formData) {
+      formData.append(this.field.attribute, this.value || "");
+    },
+
+    /**
+     * Update the field's internal value.
+     */
+    handleChange(value) {
+      this.value = value;
+    }
+  }
+};
 </script>

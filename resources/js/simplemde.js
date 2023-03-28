@@ -1,5 +1,9 @@
-Nova.booting((Vue, router, store) => {
-  Vue.component('index-nova-simplemde-field', require('./components/IndexField').default)
-  Vue.component('detail-nova-simplemde-field', require('./components/DetailField').default)
-  Vue.component('form-nova-simplemde-field', require('./components/FormField').default)
-})
+import IndexField from './components/IndexField';
+import DetailField from './components/DetailField';
+import FormField from './components/FormField';
+
+Nova.booting((app, store) => {
+	app.component('index-nova-simplemde-field', IndexField);
+	app.component('detail-nova-simplemde-field', DetailField);
+	app.component('form-nova-simplemde-field', FormField);
+});
